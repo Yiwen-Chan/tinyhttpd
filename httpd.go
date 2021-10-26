@@ -6,6 +6,18 @@ import (
 )
 
 func main() {
+	listener, err := StartUp(":8080")
+	if err != nil {
+		panic(err)
+	}
+	for {
+		conn, err := listener.Accept()
+		if err != nil {
+			continue
+		}
+		conn.Write([]byte("xxx"))
+		conn.Close()
+	}
 
 }
 
