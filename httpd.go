@@ -29,23 +29,26 @@ func main() {
 func AcceptRequest(client net.Conn) error {
 	var (
 		method string
+		url    string
 	)
 	br := bufio.NewReader(client)
-	b, _, err := br.ReadLine()
+	method, err := br.ReadString(' ')
 	if err != nil {
 		return err
-	}
-	var buf = string(b)
-	if i := strings.Index(buf, " "); i != -1 {
-		method = buf[:i]
-	} else {
-		UnimpleMented(client)
-		return nil
 	}
 	if method != "GET" && method != "POST" {
 		UnimpleMented(client)
 		return nil
 	}
+
+	i = strings.Index(buf[i+1:], " ")
+	if i != -1 {
+		url = buf[:i]
+	} else {
+		UnimpleMented(client)
+		return nil
+	}
+	url = buf[i+1:]
 	if method == "GET" {
 
 	}
